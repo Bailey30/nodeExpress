@@ -1,18 +1,33 @@
-const express = require("express");
-const res = require("express/lib/response");
+require("./db/connection")
 
+const express = require("express");
+// const res = require("express/lib/response");
+const cors = require("cors")
+const userRouter = require("./user/userRoutes")
 const app = express()
 
 const port = 5000;
 
+app.use(express.json())
+app.use(cors())
+
+app.use(userRouter)
+
+
+
+//the app.listen function is used to bind and listen to the connections on the specified host and port
 app.listen(port, () => {
     console.log("listening on port 5000");
 });
 
-app.use("/", express.static("public")); ///pointing to an endpoint in our browser
-app.use("/aboutus", express.static("public/aboutus.html"));
+// //the app.use function is used to mouth the specified middleware function(s) at the the path with is being specified
+// app.use("/", express.static("public")); ///pointing to an endpoint in our browser
+// app.use("/aboutus", express.static("public/aboutus.html"));
 
-////////////////////////////////
+
+
+
+//////////////////////////////////////////
 
 // app.use(express.static("public"))
 // app.use(express.urlencoded({extended: true}))
