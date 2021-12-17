@@ -13,14 +13,14 @@ app.use(cors())
 
 app.use(userRouter)
 
-
+ // npm run devStart ----- for nodemon
 
 //the app.listen function is used to bind and listen to the connections on the specified host and port
 app.listen(port, () => {
     console.log("listening on port 5000");
 });
 
-// //the app.use function is used to mouth the specified middleware function(s) at the the path with is being specified
+// //the app.use function is used to mount the specified middleware function(s) at the the path with is being specified
 // app.use("/", express.static("public")); ///pointing to an endpoint in our browser
 // app.use("/aboutus", express.static("public/aboutus.html"));
 
