@@ -29,6 +29,12 @@ exports.login = async (req, res, next) => {
     try {
         const user = await User.findOne(req.body.filter)
         req.user = user
+        // console.log(user);
+        req.oldpassword = req.body.oldpassword
+        console.log(req.oldpassword);
+        req.newpassword = req.body.newpassword 
+        console.log(req.newpassword);
+        console.log(req.body);
         // res.locals.user = await User.findOne(req.body.filter)
         // res.locals.password = req.body.password
         if (user) { 

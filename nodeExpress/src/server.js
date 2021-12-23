@@ -6,7 +6,7 @@ const cors = require("cors")
 const userRouter = require("./user/userRoutes")
 const app = express()
 
-const port = 5000;
+const port = 5001;
 
 app.use(express.json())
 app.use(cors())
@@ -17,7 +17,7 @@ app.use(userRouter)
 
 //the app.listen function is used to bind and listen to the connections on the specified host and port
 app.listen(port, () => {
-    console.log("listening on port 5000");
+    console.log(`listening on port ${port}` );
 });
 
 // //the app.use function is used to mount the specified middleware function(s) at the the path with is being specified

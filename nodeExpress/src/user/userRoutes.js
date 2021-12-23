@@ -1,6 +1,6 @@
 const { Router } = require("express")
 const { addUser, updateUser, getUser, deleteUser, login } = require("./userController")
-const { hashPassword, decryptPassword, emailCheck } = require("../middleware")
+const { hashPassword, decryptPassword, emailCheck, changePasswordBcrypt, changePasswordHash } = require("../middleware")
 const userRouter = Router();
 
 userRouter.post("/user", hashPassword, emailCheck, addUser); 
@@ -11,7 +11,7 @@ userRouter.post("/user", hashPassword, emailCheck, addUser);
 // 	"password": "test"
 // }
 
-userRouter.get("/login", login, decryptPassword)
+userRouter.post("/login", login, decryptPassword)
 //req:
 // //{
 // 	"filter": {
@@ -34,7 +34,18 @@ userRouter.put("/user", updateUser)
 // }
 userRouter.delete("/user", deleteUser)// "username": "mary"
 
-module.exports = userRouter;
+userRouter.put("/changePassword", login, changePasswordBcrypt, changePasswordHash  )
+// req:
+// {
+//     "filter":{
+//         "username":"maggy"
+//     },
+//     "oldpassword": "test",
+//     "newpassword": 1234
+// }
 
+
+
+module.exports = userRouter;
 
 ///app.use(/user. ()=> {}) -- would run every time the /user path is accessed

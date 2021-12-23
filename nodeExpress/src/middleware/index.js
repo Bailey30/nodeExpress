@@ -62,3 +62,33 @@ exports.decryptPassword = async (req, res, next) => {
         res.status(500).send({message: `incorrect password`})   
     }
 }
+
+exports.changePasswordBcrypt = async (res, req, next) => {
+    try {
+        // const user = req.user
+        // console.log(res.user);
+        console.log(req.body);
+        const bcrypted = await bcrypt.compare(res.body.oldpassword, res.user.password)
+        if(bcrypted) {
+            next()
+        }
+    } catch (error) {
+        console.log(error);
+        // res.status(500).send({message:"incorrect password"})
+    }
+}
+
+exports.changePasswordHash = async (res, req, next) => {
+    try {
+        const user = req.user
+        const hashedNewPassword = await bcrypt.hash(res.body.newpassword, 8)
+        const updated = await User.findOneAndUpdate(res.body.filter, {password: hashedNewPassword})
+        // res.status(200).send({message: "seems to have worked for some reason", user, updated})
+        console.log("what");
+        
+
+    } catch (error) {
+        console.log(error);
+        // res.status(500).send({message: "something wrong at changePasswordHash function"})
+    }
+}
